@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>Library</OutputType>
-    <RootNamespace>DialogueScriptLibrary</RootNamespace>
+    <RootNamespace>RangHo.DialogueScript</RootNamespace>
     <AssemblyName>DialogueScriptLibrary</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AST.cs" />
+    <Compile Include="AST\Node.cs" />
+    <Compile Include="AST\Value.cs" />
     <Compile Include="GenericStream.cs" />
     <Compile Include="Interpreter.cs" />
     <Compile Include="IOutputManager.cs" />
@@ -60,6 +62,9 @@
     <Compile Include="Token.cs" />
     <Compile Include="Tokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AST\Statement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
