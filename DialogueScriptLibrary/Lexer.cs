@@ -107,7 +107,7 @@ namespace RangHo.DialogueScript
 
         private AbstractToken ReadOperator()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Operators are not implemented yet.");
             // TODO: Implement Operators
             //       They must be fully operational, including operator
             //       execution order.
