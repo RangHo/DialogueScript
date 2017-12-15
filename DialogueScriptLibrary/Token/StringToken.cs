@@ -8,6 +8,9 @@ using RangHo.DialogueScript.Tool;
 
 namespace RangHo.DialogueScript.Token
 {
+    /// <summary>
+    /// Token object that represents string literals
+    /// </summary>
     internal sealed class StringToken : AbstractToken
     {
         private string _content;
@@ -20,15 +23,6 @@ namespace RangHo.DialogueScript.Token
             }
             protected set
             {
-                this._content = value.Replace("\\n", "\n")
-                                     .Replace("\\t", "\t")
-                                     .Replace("\\\"", "\"")
-                                     .Replace("\\'", "\"")
-                                     .Replace("\\“", "\"")
-                                     .Replace("\\”", "\"")
-                                     .Replace("\\‘", "\"")
-                                     .Replace("\\’", "\"");
-
                 StringBuilder sb = new StringBuilder();
                 char[] valueArray = value.ToCharArray();
 
@@ -89,5 +83,7 @@ namespace RangHo.DialogueScript.Token
         }
 
         public StringToken(string content) : base(content) { }
+
+        public static bool IsEscape(char escaped) => escaped == '\\';
     }
 }
