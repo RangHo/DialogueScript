@@ -41,10 +41,17 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KeraLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=04d04586786c6f34, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.3.2.1\lib\net35\KeraLua.dll</HintPath>
+    </Reference>
+    <Reference Include="NLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8df2ab518030ea95, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.3.2.1\lib\net35\NLua.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -58,13 +65,30 @@
     <Compile Include="Interpreter.cs" />
     <Compile Include="IOutputManager.cs" />
     <Compile Include="Exception.cs" />
+    <Compile Include="Lexer.cs" />
+    <Compile Include="Tool\AbstractCharacter.cs" />
+    <Compile Include="Tool\Exceptions.cs" />
+    <Compile Include="Tool\InputReader.cs" />
+    <Compile Include="Tool\Predicates.cs" />
     <Compile Include="Parser.cs" />
-    <Compile Include="Token.cs" />
     <Compile Include="Tokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Token\AbstractToken.cs" />
+    <Compile Include="Token\IdentifierToken.cs" />
+    <Compile Include="Token\KeywordToken.cs" />
+    <Compile Include="Token\NumberToken.cs" />
+    <Compile Include="Token\StringToken.cs" />
+    <Compile Include="Token\WordToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AST\Statement.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+xcopy /s /y "C:\Users\zu010\Documents\Development\DialogueScript\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
