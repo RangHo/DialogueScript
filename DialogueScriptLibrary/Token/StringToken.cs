@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-using RangHo.DialogueScript.Tool;
+using RangHo.DialogueScript.Utility;
 
 namespace RangHo.DialogueScript.Token
 {

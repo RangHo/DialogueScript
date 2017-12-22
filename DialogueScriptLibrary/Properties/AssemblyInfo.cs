@@ -2,6 +2,7 @@
 
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 #endregion
@@ -10,11 +11,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DialogueScriptLibrary")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Human-readable Script to note dialogue sequences.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DialogueScriptLibrary")]
-[assembly: AssemblyCopyright("Copyright 2017")]
+[assembly: AssemblyCopyright("Copyright (c) 2017 RangHo")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,10 +23,15 @@ using System.Runtime.InteropServices;
 // If you need to expose a type to COM, use [ComVisible(true)] on that type.
 [assembly: ComVisible(false)]
 
+#if DEBUG
+// This allows the unit test assembly be able to access internal classes.
+[assembly:InternalsVisibleTo("DialogueTest")]
+#endif
+
 // The assembly version has following format :
 //
 // Major.Minor.Build.Revision
 //
 // You can specify all the values or you can use the default the Revision and 
 // Build Numbers by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("0.5.*")]

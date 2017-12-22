@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RangHo.DialogueScript.Tool
+namespace RangHo.DialogueScript.Utility
 {
     public abstract class AbstractCharacter<TImage>
     {

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace RangHo.DialogueScript.Token
 {
+    /// <summary>
+    /// Token object that represents the end of line
+    /// </summary>
     internal sealed class NewLineToken : AbstractToken
     {
         public NewLineToken() : base(Environment.NewLine) { }

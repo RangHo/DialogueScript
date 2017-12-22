@@ -61,20 +61,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AST.cs" />
     <Compile Include="AST\Node.cs" />
     <Compile Include="AST\Value.cs" />
-    <Compile Include="GenericStream.cs" />
-    <Compile Include="Interpreter.cs" />
-    <Compile Include="IOutputManager.cs" />
-    <Compile Include="Exception.cs" />
     <Compile Include="Lexer.cs" />
-    <Compile Include="Tool\AbstractCharacter.cs" />
-    <Compile Include="Tool\Exceptions.cs" />
-    <Compile Include="Tool\InputReader.cs" />
-    <Compile Include="Tool\Predicates.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="Tokenizer.cs" />
+    <Compile Include="Token\NewLineToken.cs" />
+    <Compile Include="Token\OperatorToken.cs" />
+    <Compile Include="Token\PunctuationToken.cs" />
+    <Compile Include="Utility\AbstractCharacter.cs" />
+    <Compile Include="Utility\Exceptions.cs" />
+    <Compile Include="Utility\ExtensionMethods.cs" />
+    <Compile Include="Utility\InputReader.cs" />
+    <Compile Include="Utility\Predicates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Token\AbstractToken.cs" />
     <Compile Include="Token\IdentifierToken.cs" />

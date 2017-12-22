@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using RangHo.DialogueScript.Token;
-using RangHo.DialogueScript.Tool;
+using RangHo.DialogueScript.Utility;
 
 namespace RangHo.DialogueScript
 {
@@ -19,33 +19,93 @@ namespace RangHo.DialogueScript
         /// <returns>True if availability check succeeds</returns>
         public delegate bool Condition(char target);
 
+        /// <summary>
+        /// Initializes new Lexer object
+        /// </summary>
+        /// <param name="input">Script to process</param>
         public Lexer(string input)
         {
             this._input = new InputReader<char>(input.ToCharArray());
         }
 
+        /// <summary>
+        /// Process all characters in the input stream.
+        /// </summary>
+        /// <returns>Array of tokens that are processed.</returns>
+        public AbstractToken[] ReadAll()
+        {
+            List<AbstractToken> result = new List<AbstractToken>();
+
+            AbstractToken token = null;
+            while (true)
+            {
+                token = ReadNext();
+
+                if (token == null)
+                    break;
+
+                result.Add(token);
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// Processes next token and returns it.
+        /// </summary>
+        /// <returns>Type of <see cref="AbstractToken"/> object</returns>
         public AbstractToken ReadNext()
         {
+            // Remove all unnecessary whitespace characters
+            ReadWhile(Predicates.IsWhitespace);
+
+            if (this._input.IsEnd)
+                return null;
+
             char target = this._input.Peek();
             AbstractToken token = null;
 
+            // Comment
             if (target == '#')
                 token = ReadComment();
+
+            // New line start
             else if (target == '\n')
                 token = ReadNewLine();
-            else if (target == '"')
+
+            // String literal
+            else if (Predicates.IsStringDelimiter(target))
                 token = ReadString();
-            else if (Predicate.IsNumberBeginning(target))
+
+            // Number literal
+            else if (Predicates.IsNumberBeginning(target))
                 token = ReadNumber();
-            else if (Predicate.IsIdentifierBeginning(target))
+
+            // Word (Identifiers & Keywords)
+            else if (Predicates.IsIdentifierBeginning(target))
                 token = ReadWord();
-            else if (Predicate.IsOperator(target))
+
+            // Operator
+            else if (Predicates.IsOperator(target))
                 token = ReadOperator();
+
+            // Punctuation
+            else if (Predicates.IsPunctuation(target))
+                token = ReadPunctuation();
+
+            // Other unprocessable characters
+            else
+                throw new UnexpectedCharacterException("Cannot handle character: " + target);
 
             return token;
         }
 
-        private string ReadWhile(Condition predicate)
+        /// <summary>
+        /// Read characters while predicate returns true.
+        /// </summary>
+        /// <param name="predicate">This determines whether or not to continue.</param>
+        /// <returns>Read characters in <see cref="string"/></returns>
+        public string ReadWhile(Condition predicate)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -55,11 +115,16 @@ namespace RangHo.DialogueScript
             return sb.ToString();
         }
 
-        private string ReadWhile(char until)
+        /// <summary>
+        /// Read characters until the predicate returns true.
+        /// </summary>
+        /// <param name="predicate">This determines whether or not to continue.</param>
+        /// <returns>Read characters in <see cref="string"/></returns>
+        private string ReadUntil(Condition predicate)
         {
             StringBuilder sb = new StringBuilder();
             
-            while (this._input.Peek() != until)
+            while (!predicate(this._input.Peek()))
             {
                 char temp = this._input.Read();
 
@@ -76,36 +141,56 @@ namespace RangHo.DialogueScript
 
         private AbstractToken ReadComment()
         {
-            ReadWhile('\n');
+            ReadUntil((char target) => target == '\n'); // Read until \n
             return ReadNext();
         }
 
         private StringToken ReadString()
         {
             this._input.Read(); // Removes " character
-            string str = ReadWhile('"');
+
+            StringBuilder sb = new StringBuilder();
+            
+            string target;
+            // This loop ensures all escaped characters to be included
+            while (true)
+            {
+                target = ReadUntil(Predicates.IsStringDelimiter);
+                sb.Append(target);
+
+                Console.WriteLine(target);
+
+                if (target.EndsWith("\\"))
+                {
+                    sb.Append(this._input.Read());  // Read and add escaped string delimiter
+                    continue;                       // ...and start the process again
+                }
+
+                break;
+            }
+
             this._input.Read(); // Removes trailling " character
 
-            return new StringToken(str);
+            return new StringToken(sb.ToString());
         }
 
         private NumberToken ReadNumber()
         {
-            string str = ReadWhile(Predicate.IsNumber);
+            string str = ReadWhile(Predicates.IsNumber);
             return new NumberToken(str);
         }
 
         private WordToken ReadWord()
         {
-            string str = ReadWhile(Predicate.IsIdentifier);
+            string str = ReadWhile(Predicates.IsIdentifier);
 
-            if (Predicate.IsKeyword(str))
+            if (Predicates.IsKeyword(str))
                 return new KeywordToken(str);
             else
                 return new IdentifierToken(str);
         }
 
-        private AbstractToken ReadOperator()
+        private OperatorToken ReadOperator()
         {
             throw new NotImplementedException("Operators are not implemented yet.");
             // TODO: Implement Operators
@@ -113,9 +198,16 @@ namespace RangHo.DialogueScript
             //       execution order.
         }
 
-        private AbstractToken ReadNewLine()
+        private PunctuationToken ReadPunctuation()
         {
-            throw new NotImplementedException();
+            char input = this._input.Read();
+            return new PunctuationToken(input.ToString());
+        }
+
+        private NewLineToken ReadNewLine()
+        {
+            this._input.Read(); // Removes \n character
+            return new NewLineToken();
         }
     }
 }

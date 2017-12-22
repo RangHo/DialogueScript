@@ -3,29 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RangHo.DialogueScript.Tool
+namespace RangHo.DialogueScript.Utility
 {
     internal class InputReader<T>
     {
         private T[] _input;
 
-        private int _position;
-
-        public int Position
-        {
-            get
-            {
-                return this._position;
-            }
-            set
-            {
-                if (this._input.Length <= value)
-                    throw new IndexOutOfRangeException();
-
-                this._position = value;
-            }
-
-        }
+        public uint Position;
 
         public bool IsEnd { get => this._input.Length <= this.Position; }
 

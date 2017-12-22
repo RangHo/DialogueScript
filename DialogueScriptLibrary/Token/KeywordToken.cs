@@ -5,6 +5,9 @@ using System.Text;
 
 namespace RangHo.DialogueScript.Token
 {
+    /// <summary>
+    /// Token object that represents keywords
+    /// </summary>
     internal sealed class KeywordToken : WordToken
     {
         public KeywordToken(string content) : base(content) { }
