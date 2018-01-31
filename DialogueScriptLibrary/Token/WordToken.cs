@@ -10,6 +10,6 @@ namespace RangHo.DialogueScript.Token
     /// </summary>
     internal class WordToken : AbstractToken
     {
-        public WordToken(string content) : base(content) { }
+        public WordToken(string content, uint position) : base(content, position) { }
     }
 }

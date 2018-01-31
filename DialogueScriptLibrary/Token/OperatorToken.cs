@@ -10,6 +10,6 @@ namespace RangHo.DialogueScript.Token
     /// </summary>
     internal sealed class OperatorToken : AbstractToken
     {
-        public OperatorToken(string content) : base(content) { }
+        public OperatorToken(string content, uint position) : base(content, position) { }
     }
 }

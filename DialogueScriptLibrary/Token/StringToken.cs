@@ -46,7 +46,7 @@ namespace RangHo.DialogueScript.Token
                                 escapedStr = "\t";
                                 break;
 
-                            // String quotation mark
+                            // String quotation mark (and fuck you "Smart Quote" feature)
                             case '"':
                             case '\'':
                             case '“':
@@ -82,7 +82,7 @@ namespace RangHo.DialogueScript.Token
             }
         }
 
-        public StringToken(string content) : base(content) { }
+        public StringToken(string content, uint position) : base(content, position) { }
 
         public static bool IsEscape(char escaped) => escaped == '\\';
     }

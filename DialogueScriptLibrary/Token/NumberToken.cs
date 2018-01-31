@@ -10,6 +10,6 @@ namespace RangHo.DialogueScript.Token
     /// </summary>
     internal sealed class NumberToken : AbstractToken
     {
-        public NumberToken(string content) : base(content) { }
+        public NumberToken(string content, uint position) : base(content, position) { }
     }
 }

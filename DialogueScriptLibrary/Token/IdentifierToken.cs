@@ -10,6 +10,6 @@ namespace RangHo.DialogueScript.Token
     /// </summary>
     internal sealed class IdentifierToken : WordToken
     {
-        public IdentifierToken(string content) : base(content) { }
+        public IdentifierToken(string content, uint position) : base(content, position) { }
     }
 }
