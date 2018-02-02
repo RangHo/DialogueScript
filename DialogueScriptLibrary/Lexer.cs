@@ -8,7 +8,7 @@ using RangHo.DialogueScript.Utility;
 
 namespace RangHo.DialogueScript
 {
-    internal class Lexer
+    public class Lexer
     {
         private InputReader<char> _input;
 
@@ -54,6 +54,10 @@ namespace RangHo.DialogueScript
         /// Processes next token and returns it.
         /// </summary>
         /// <returns>Type of <see cref="AbstractToken"/> object</returns>
+        /// <exception cref="UnexpectedCharacterException">
+        /// This is thrown when the lexer does not recognize the character
+        /// in the input.
+        /// </exception>
         public AbstractToken ReadNext()
         {
             // Remove all unnecessary whitespace characters
@@ -120,6 +124,14 @@ namespace RangHo.DialogueScript
         /// </summary>
         /// <param name="predicate">This determines whether or not to continue.</param>
         /// <returns>Read characters in <see cref="string"/></returns>
+        /// <exception cref="UnexpectedTerminationException">
+        /// This is thrown when the input is terminated (reaches the end) without
+        /// meeting the return condition.
+        /// </exception>
+        /// <exception cref="UnexpectedCharacterException">
+        /// This is thrown when line break occurs without meeting the return
+        /// condition.
+        /// </exception>
         private string ReadUntil(Condition predicate)
         {
             StringBuilder sb = new StringBuilder();
@@ -129,7 +141,7 @@ namespace RangHo.DialogueScript
                 char temp = this._input.Read();
 
                 if (this._input.IsEnd)
-                    throw new UnexpectedCharacterException("Input is terminated while reading a token.");
+                    throw new UnexpectedTerminationException("Input is terminated while reading a token.");
                 if (temp == '\n')
                     throw new UnexpectedCharacterException("NewLine character encountered while reading a token.");
 
@@ -147,6 +159,8 @@ namespace RangHo.DialogueScript
 
         private StringToken ReadString()
         {
+            uint position = this._input.Position;
+
             this._input.Read(); // Removes " character
 
             StringBuilder sb = new StringBuilder();
@@ -171,43 +185,47 @@ namespace RangHo.DialogueScript
 
             this._input.Read(); // Removes trailling " character
 
-            return new StringToken(sb.ToString());
+            return new StringToken(sb.ToString(), position);
         }
 
         private NumberToken ReadNumber()
         {
+            uint position = this._input.Position;
             string str = ReadWhile(Predicates.IsNumber);
-            return new NumberToken(str);
+            return new NumberToken(str, position);
         }
 
         private WordToken ReadWord()
         {
+            uint position = this._input.Position;
             string str = ReadWhile(Predicates.IsIdentifier);
 
             if (Predicates.IsKeyword(str))
-                return new KeywordToken(str);
+                return new KeywordToken(str, position);
             else
-                return new IdentifierToken(str);
+                return new IdentifierToken(str, position);
         }
 
         private OperatorToken ReadOperator()
         {
-            throw new NotImplementedException("Operators are not implemented yet.");
-            // TODO: Implement Operators
-            //       They must be fully operational, including operator
-            //       execution order.
+            uint position = this._input.Position;
+            string str = ReadWhile(Predicates.IsOperator);
+
+            return new OperatorToken(str, position);
         }
 
         private PunctuationToken ReadPunctuation()
         {
+            uint position = this._input.Position;
             char input = this._input.Read();
-            return new PunctuationToken(input.ToString());
+            return new PunctuationToken(input.ToString(), position);
         }
 
         private NewLineToken ReadNewLine()
         {
+            uint position = this._input.Position;
             this._input.Read(); // Removes \n character
-            return new NewLineToken();
+            return new NewLineToken(position);
         }
     }
 }

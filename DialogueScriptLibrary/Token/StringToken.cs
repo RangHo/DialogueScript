@@ -11,7 +11,7 @@ namespace RangHo.DialogueScript.Token
     /// <summary>
     /// Token object that represents string literals
     /// </summary>
-    internal sealed class StringToken : AbstractToken
+    public sealed class StringToken : AbstractToken
     {
         private string _content;
 
@@ -46,7 +46,7 @@ namespace RangHo.DialogueScript.Token
                                 escapedStr = "\t";
                                 break;
 
-                            // String quotation mark
+                            // String quotation mark (and fuck you "Smart Quote" feature)
                             case '"':
                             case '\'':
                             case '“':
@@ -82,7 +82,7 @@ namespace RangHo.DialogueScript.Token
             }
         }
 
-        public StringToken(string content) : base(content) { }
+        public StringToken(string content, uint position) : base(content, position) { }
 
         public static bool IsEscape(char escaped) => escaped == '\\';
     }

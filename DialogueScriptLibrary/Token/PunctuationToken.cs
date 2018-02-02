@@ -5,8 +5,8 @@ using System.Text;
 
 namespace RangHo.DialogueScript.Token
 {
-    internal sealed class PunctuationToken : AbstractToken
+    public sealed class PunctuationToken : AbstractToken
     {
-        public PunctuationToken(string content) : base(content) { }
+        public PunctuationToken(string content, uint position) : base(content, position) { }
     }
 }

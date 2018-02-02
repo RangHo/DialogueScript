@@ -8,8 +8,8 @@ namespace RangHo.DialogueScript.Token
     /// <summary>
     /// Token object that represents keywords
     /// </summary>
-    internal sealed class KeywordToken : WordToken
+    public sealed class KeywordToken : WordToken
     {
-        public KeywordToken(string content) : base(content) { }
+        public KeywordToken(string content, uint position) : base(content, position) { }
     }
 }

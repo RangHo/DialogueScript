@@ -50,7 +50,7 @@ namespace RangHo.DialogueScript.Utility
         /// <param name="target">Character to check</param>
         /// <returns>True if punctuation</returns>
         public static bool IsPunctuation(char target)
-            => ".(){}[]:;".Contains(target);
+            => ".,:;(){}[]".Contains(target);
 
         /// <summary>
         /// Checks if the character can be a string
@@ -58,7 +58,7 @@ namespace RangHo.DialogueScript.Utility
         /// <param name="target">Character to check</param>
         /// <returns>True if string</returns>
         public static bool IsStringDelimiter(char target)
-            => "\"“”‘’'`".Contains(target);
+            => "\"“”‘’'`".Contains(target);     // Fuck the "smart quote" feature
 
         /// <summary>
         /// Checks if the character can be the beginning of a number

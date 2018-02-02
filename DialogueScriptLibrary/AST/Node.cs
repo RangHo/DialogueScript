@@ -5,13 +5,12 @@ using System.Text;
 
 namespace RangHo.DialogueScript.AST
 {
-    internal abstract class Node
+    public abstract class Node
     {
+        /// <summary>
+        /// Name of the AST node
+        /// </summary>
         public virtual string Name { get => "Node"; }
-
-        public virtual int LineNumber { get; private set; }
-
-        public abstract void Execute();
 
         public override string ToString()
         {
