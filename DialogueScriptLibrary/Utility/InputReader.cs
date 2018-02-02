@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RangHo.DialogueScript.Utility
 {
-    internal class InputReader<T>
+    public class InputReader<T>
     {
         private T[] _input;
 
