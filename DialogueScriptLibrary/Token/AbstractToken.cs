@@ -8,7 +8,7 @@ namespace RangHo.DialogueScript.Token
     /// <summary>
     /// Base class that all token objects must be derived from.
     /// </summary>
-    internal abstract class AbstractToken
+    public abstract class AbstractToken
     {
         public virtual uint Position { get; protected set; }
 
@@ -26,8 +26,8 @@ namespace RangHo.DialogueScript.Token
         /// <summary>
         /// Performs shallow equality check.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>True if same; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             AbstractToken target = (AbstractToken)obj;
@@ -38,10 +38,7 @@ namespace RangHo.DialogueScript.Token
         /// <summary>
         /// Gets a has code.
         /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        /// <returns>Hash code of the object.</returns>
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RangHo.DialogueScript.AST
 {
-    internal class Member : Value
+    public class Member : Value
     {
     }
 }

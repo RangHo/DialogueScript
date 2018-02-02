@@ -8,7 +8,7 @@ namespace RangHo.DialogueScript.Token
     /// <summary>
     /// Token object that represents identifiers
     /// </summary>
-    internal sealed class IdentifierToken : WordToken
+    public sealed class IdentifierToken : WordToken
     {
         public IdentifierToken(string content, uint position) : base(content, position) { }
     }

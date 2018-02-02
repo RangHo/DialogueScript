@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RangHo.DialogueScript.AST
 {
-    public class Jump : Statement
+    class Return
     {
     }
 }

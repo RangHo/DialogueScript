@@ -11,7 +11,7 @@ namespace RangHo.DialogueScript.Token
     /// <summary>
     /// Token object that represents string literals
     /// </summary>
-    internal sealed class StringToken : AbstractToken
+    public sealed class StringToken : AbstractToken
     {
         private string _content;
 

@@ -5,7 +5,8 @@ using System.Text;
 
 namespace RangHo.DialogueScript.AST
 {
-    internal class Say : Statement
+    public class Say : Statement
     {
+        public override string Name { get => "Say"; }
     }
 }

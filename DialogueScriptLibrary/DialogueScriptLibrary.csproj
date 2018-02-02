@@ -61,9 +61,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AST\Assign.cs" />
+    <Compile Include="AST\Choice.cs" />
+    <Compile Include="AST\Identifier.cs" />
+    <Compile Include="AST\Jump.cs" />
+    <Compile Include="AST\Label.cs" />
+    <Compile Include="AST\Member.cs" />
     <Compile Include="AST\Node.cs" />
+    <Compile Include="AST\Say.cs" />
     <Compile Include="AST\Value.cs" />
     <Compile Include="Lexer.cs" />
+    <None Include="Parser.cs" />
     <Compile Include="Token\NewLineToken.cs" />
     <Compile Include="Token\OperatorToken.cs" />
     <Compile Include="Token\PunctuationToken.cs" />

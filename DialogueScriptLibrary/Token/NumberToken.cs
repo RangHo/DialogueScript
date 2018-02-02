@@ -8,7 +8,7 @@ namespace RangHo.DialogueScript.Token
     /// <summary>
     /// Token object that represents numbers (both integers and decimals)
     /// </summary>
-    internal sealed class NumberToken : AbstractToken
+    public sealed class NumberToken : AbstractToken
     {
         public NumberToken(string content, uint position) : base(content, position) { }
     }

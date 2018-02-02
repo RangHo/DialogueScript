@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RangHo.DialogueScript.AST
 {
-    internal class Label : Statement
+    public class Label : Statement
     {
     }
 }
